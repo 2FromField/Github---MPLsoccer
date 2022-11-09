@@ -80,7 +80,7 @@ def GetPlayingTimePerPosition(path):
                         minutes = int(exit[:2])-int(entrance[:2])
                     else:
                         minutes = (int(exit[:2])-int(entrance[:2]))-1
-                #        
+                #
                 else:
                     seconds = int(exit[3:]) - int(entrance[3:])
                     # MINUTES

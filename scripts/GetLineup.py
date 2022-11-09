@@ -91,7 +91,7 @@ def getLineup(team,path):
     time_laps = ['90:00']
     
     # Dataframes of the lineups on the field
-    df_lineups = pd.DataFrame([],columns=['player','position','player_id','number','cards','from','to','nationality','playing_time'])
+    df_lineups = pd.DataFrame([],columns=['player','position','player_id','number','cards','from','to','nationality'])
     
     
     # Search for the various instances of the match 
@@ -138,17 +138,6 @@ def getLineup(team,path):
                     else:
                         df_lineups.loc[line,'to'] = '90:00'
                     line += 1
-               
-                # PLAYING TIME
-                if lineup_team[players]['positions'][-1]['to'] != None:
-                    finalWhistle = int(lineup_team[players]['positions'][-1]['to'][:2])
-                    seconds = lineup_team[players]['positions'][-1]['to'][3:]
-                else:
-                    finalWhistle = 90
-                    seconds = '00'
-                playing_time = finalWhistle - int(lineup_team[players]['positions'][0]['from'][:2])
-                df_lineups.loc[line,'playing_time'] = f'{playing_time}:{seconds}'
-                
             
             # CARDS
             if len(lineup_team[players]['cards']) > 0:
@@ -205,4 +194,4 @@ def getLineup(team,path):
 
 
 
-getLineup(team=0,filename='Lineups_JSON/lineups_16120.json')
+getLineup(team=0,path='Lineups_JSON/lineups_16120.json')
