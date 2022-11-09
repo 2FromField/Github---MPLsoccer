@@ -9,7 +9,7 @@ from matplotlib.collections import PatchCollection
 
 
 
-def getLineup(team,filename):
+def getLineup(team,path):
     '''
     Generate a field visualisation of a lineup between the various replacements.
     
@@ -26,7 +26,7 @@ def getLineup(team,filename):
     placementOnField = {'Goalkeeper':               (0,39.5,1,40,4,38,8,38,2,36),
                     'Right Center Back':            (18,47.5,19,48,22,46,26,46,20,44),
                     'Left Center Back' :            (18,31.5,19,32,22,30,26,30,20,28),
-                    'Center Back' :                 (18,39.5,19,40,22,38,26,38,21,36),
+                    'Center Back' :                 (18,39.5,19,40,22,38,26,38,20,36),
                     'Left Wing Back':               (26,7.5,27,8,30,6,34,6,28,4),
                     'Right Wing Back':              (26,72.5,27,73,30,71,33,71,28,69),
                     'Left Back':                    (22,18.5,23,19,26,17,30,17,24,15),
@@ -74,7 +74,7 @@ def getLineup(team,filename):
                     }
     
     # OPEN THE FILE
-    with open(f'{filename}') as file:
+    with open(f'{path}') as file:
         data = json.load(file)
     
     # TEAM NAME
@@ -170,6 +170,7 @@ def getLineup(team,filename):
                 if df_lineups.nationality[k] == cle:
                     df_lineups.nationality[k] = value
         
+        print(df_lineups)
          
         # VISUALISATION
         pitch= Pitch(pitch_color='grass', line_color='white')
@@ -204,4 +205,4 @@ def getLineup(team,filename):
 
 
 
-getLineup(team=1,filename='Lineups_JSON/lineups_15973.json')
+getLineup(team=0,filename='Lineups_JSON/lineups_16120.json')
