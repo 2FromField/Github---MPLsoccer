@@ -6,7 +6,7 @@ import numpy as np
 def GetStats(globPath):
     '''
     Generate 2 dataframes:
-        [0] : All stats per per season per team
+        [0] : All stats per season per team
         [1] : Average stats of all seasons per team
         
     Parameters:
