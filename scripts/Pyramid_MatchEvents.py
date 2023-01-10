@@ -1,6 +1,12 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
+from matplotlib.offsetbox import OffsetImage, AnnotationBbox, OffsetBox, AnchoredOffsetbox
+import matplotlib.image as mpimg
+import matplotlib.patches as patches
+import matplotlib.cbook as cbook
+
+
 
 
 def EventStats_XLSX(filename):
@@ -129,8 +135,12 @@ print(df)
 
 
 Stats = ['Shot','Pass [%]','Interception [%]','Dribble [%]','Duel [%]','Possession [%]','Substitution','Foul Committed','Clearance']
-sns.set(rc={'figure.facecolor':'#23272d'})
 
+
+### PLOTTING
+fig, ax = plt.subplots()
+# sns.set(rc={'figure.facecolor':'#23272d'})
+fig.set_facecolor('#23272d')
 
 bar_plot = sns.barplot(x=home, y='Stats', data=df, order=Stats, color='#4469b1')
 bar_plot = sns.barplot(x=away, y='Stats', data=df, order=Stats, color='#9b3838')
@@ -159,7 +169,19 @@ plt.text(0, -1.1, f":", size=15, color="whitesmoke", ha='center', fontweight='bo
 plt.text(-10, -1.1, f"{stats[0]['Shot_completed']}", size=15, color="whitesmoke", ha='center', fontweight='bold')
 
 # Copyright
-plt.text(130, 9.5, f"Copyright: 2FromField", size=10, color="whitesmoke", ha='center', fontstyle='italic')
+plt.text(130, 9.6, f"Copyright: 2FromField", size=10, color="whitesmoke", ha='center', fontstyle='italic')
+
+### IMAGE
+home_blazon = mpimg.imread(f'pictures/{home.lower()}.png')
+imagebox_home = OffsetImage(home_blazon, zoom=0.06)
+ah = AnnotationBbox(imagebox_home, (-133, 8.4), frameon=False)
+ax.add_artist(ah)
+away_blazon = mpimg.imread(f'pictures/{away.lower()}.png')
+imagebox_away = OffsetImage(away_blazon, zoom=0.05)
+aa = AnnotationBbox(imagebox_away, (133, 8.4), frameon=False)
+ax.add_artist(aa)
+
+
 
 plt.axvline(0, c='#23272d', lw=80)
 plt.axis('off')
