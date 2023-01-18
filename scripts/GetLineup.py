@@ -1,12 +1,11 @@
 import json
 import matplotlib.pyplot as plt
-import matplotlib.image as img
 from mplsoccer import Pitch
 import pandas as pd
-import numpy as np
 import matplotlib.patches as patches
 from matplotlib.collections import PatchCollection
-
+from matplotlib.offsetbox import OffsetImage, AnnotationBbox
+import matplotlib.image as mpimg
 
 
 def getLineup(team,path):
@@ -91,7 +90,7 @@ def getLineup(team,path):
     time_laps = ['90:00']
     
     # Dataframes of the lineups on the field
-    df_lineups = pd.DataFrame([],columns=['player','position','player_id','number','cards','from','to','nationality'])
+    df_lineups = pd.DataFrame([],columns=['player','position','player_id','number','cards','from','to','nationality','nat_abbr'])
     
     
     # Search for the various instances of the match 
@@ -157,22 +156,27 @@ def getLineup(team,path):
         for k in range(len(df_lineups.nationality)):
             for cle,value in nationality.items(): 
                 if df_lineups.nationality[k] == cle:
-                    df_lineups.nationality[k] = value
+                    df_lineups.nat_abbr[k] = value
         
         print(df_lineups)
          
         # VISUALISATION
         pitch= Pitch(pitch_color='grass', line_color='white')
         fig, ax = pitch.draw()
-        fig.set_size_inches(12,8)
+        fig.set_size_inches(10,7)
         RCards = []
         YCards = []
         for d in range(len(df_lineups.index)):
             plt.scatter(placementOnField[df_lineups.position[d]][0],placementOnField[df_lineups.position[d]][1], c='red')
             plt.text(placementOnField[df_lineups.position[d]][4],placementOnField[df_lineups.position[d]][5],s=df_lineups['number'][d], fontweight='extra bold', fontsize=15, c='cyan')                #NUMBER   
-            plt.text(placementOnField[df_lineups.position[d]][6],placementOnField[df_lineups.position[d]][7],s=df_lineups['nationality'][d], fontweight='extra bold', fontsize=15, c='blue')           #NATIONALITY   
             plt.text(placementOnField[df_lineups.position[d]][2],placementOnField[df_lineups.position[d]][3],s=df_lineups['player'][d], fontweight='extra bold')                                       #POSITION
 
+            # Add nationality flag
+            flag = mpimg.imread(f'pictures/flag/{df_lineups.nationality[d]}.png')
+            imagebox_away = OffsetImage(flag, zoom=0.16)
+            aa = AnnotationBbox(imagebox_away, (placementOnField[df_lineups.position[d]][6]+2.5, placementOnField[df_lineups.position[d]][7]-1.2), frameon=False)
+            ax.add_artist(aa)
+            
             #
             if df_lineups['cards'][d] == 'Yellow Card':
 
@@ -184,10 +188,12 @@ def getLineup(team,path):
                 continue
         pcY = PatchCollection(YCards,linewidth=1, edgecolor='k', facecolor='y')
         pcR = PatchCollection(RCards,linewidth=1, edgecolor='k', facecolor='r')
+        
+        
         ax.add_collection(pcY)   
         ax.add_collection(pcR)  
          
-        #
+        plt.subplots_adjust(right=1, top=1, bottom=0, left=0)
         plt.suptitle(f'{time_laps[h]} to {time_laps[h+1]}', fontweight='extra bold')
         plt.title(f'{domicil_team} VS {visitor_team}',fontweight='extra bold', c='grey')
         plt.show()
