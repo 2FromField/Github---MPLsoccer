@@ -119,7 +119,8 @@ params = [
     #
     "Possession [%]",   "Substitution", "Foul Committed",   "Clearance",
     #
-    "Shot",         "Pass [%]",         "Interception [%]",     "Dribble [%]",      "Duel [%]"
+    'Duel [%]',     'Dribble [%]',      "Interception [%]",     'Pass [%]',         'Shot'
+    # "Shot",         "Pass [%]",         "Interception [%]",     "Dribble [%]",      "Duel [%]"
 ]
 
 # Values
@@ -132,11 +133,11 @@ values = [
     #
     stats[0]['Carry'],      stats[0]['Substitution'],   stats[0]['Foul Committed'],     stats[0]['Clearance'],
     #
-    stats[1]['Shot_completed']+stats[1]['Shot_incompleted'],
-    int(percentage(stats[1]['Pass_completed'],(stats[1]['Pass_completed']+stats[1]['Pass_incompleted']))),
-    int(percentage(stats[1]['Interception_completed'],(stats[1]['Interception_completed']+stats[1]['Interception_incompleted']))),
+    int(percentage(stats[1]['Duel_completed'],(stats[1]['Duel_completed']+stats[1]['Duel_incompleted']))),
     int(percentage(stats[1]['Dribble_completed'],(stats[1]['Dribble_completed']+stats[1]['Dribble_incompleted']))),
-    int(percentage(stats[1]['Duel_completed'],(stats[1]['Duel_completed']+stats[1]['Duel_incompleted'])))
+    int(percentage(stats[1]['Interception_completed'],(stats[1]['Interception_completed']+stats[1]['Interception_incompleted']))),
+    int(percentage(stats[1]['Pass_completed'],(stats[1]['Pass_completed']+stats[1]['Pass_incompleted']))),
+    stats[1]['Shot_completed']+stats[1]['Shot_incompleted']
 ]
 
 compare_values = [
@@ -151,8 +152,8 @@ compare_values = [
 max_values = [stats[0]['Shot_incompleted']+stats[0]['Shot_incompleted'],
               100,     100,   100,  100,     
               100,   10,    20,     50,
-              stats[1]['Shot_incompleted']+stats[1]['Shot_incompleted'],
-              100,     100,   100,  100]
+              100,     100,   100,  100,
+              stats[1]['Shot_incompleted']+stats[1]['Shot_incompleted']]
 min_values = [0]*14
 
 

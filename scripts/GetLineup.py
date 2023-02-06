@@ -53,25 +53,26 @@ def getLineup(team,path):
                     'Secondary Striker':            (105,39.5,106,40,109,38,113,38,107,36)}
     
     # Nationality abbreviation
-    nationality = {'Autria':'AT', 'Argentina':'AR','Algeria':'DZ',
-                   'Belgium':'BE', 'Bulgaria':'BG','Brazil':'BR',
-                   'Croatia':'HR','Cyprus':'CY','Czech Republic':'SK','Chile':'CL','Colombia':'COL','Cameroon':'CM','Central African Republic':'CF','Costa Rica':'CR',
+    nationality = {'Austria':'AT', 'Argentina':'AR','Algeria':'DZ',
+                   'Belgium':'BE', 'Bulgaria':'BG','Brazil':'BR','Bosnia and Herzegovina':'BA',
+                   'Croatia':'HR','Cyprus':'CY','Czech Republic':'SK','Chile':'CL','Colombia':'COL','Cameroon':'CM','Central African Republic':'CF','Costa Rica':'CR','Cape Verde':'CV','Congo, (Kinshasa)':'CG','China':'CHN',
                    'Denmark':'DK',
-                   'Estonia':'EE',
+                   'Estonia':'EE','Ecuador':'EC',
                    'France':'FR', 'Finland':'FI',
-                   'Greece':'EL','Germany':'DE','Ghana':'GHA',
+                   'Greece':'EL','Germany':'DE','Ghana':'GHA','Guinea-Bissau':'GW',
                    'Hungary':'HU','Honduras':'HND',
                    'Ireland':'IE','Italy':'IT',
                    'Japan':'JP',
                    'Korea (South)':'KR',
                    'Latvia':'LV','Luxembourg':'LU', 'Lithuania':'LT',
-                   'Morocco':'MAR', 'Monaco':'MCO','Mexico':'MX','Montenegro':'ME','Macedonia':'MK',
+                   'Morocco':'MAR', 'Monaco':'MCO','Mexico':'MX','Montenegro':'ME','Macedonia, Republic of':'MKD',
                    'Netherlands':'NL','Nigeria':'NGA',
-                   'Portugal':'PT','Poland':'PL','Paraguay':'PRY',
+                   'Portugal':'PT','Poland':'PL','Paraguay':'PRY','Peru':'PE',
                    'Romania':'RO','Russia':'RUS',
                    'Spain':'ES','Slovenia':'SI','Sweden':'SE','Slovakia':'SK','Serbia':'RS','Senegal':'SN',
                    'Turkey':'TR','Turkmenistan':'TM','Togo':'TGO',
-                   'Uruguay':'UY','United Kingdom':'UK','Uganda':'UG'
+                   'Uruguay':'UY','United Kingdom':'UK','Uganda':'UG',
+                   'Venezuela (Bolivarian Republic)':'VEN'
                     }
     
     color_team = 'blue' if team == 0 else 'red'
@@ -184,6 +185,8 @@ def getLineup(team,path):
                     df_lineups.nationality[i] = 'South Korea'
                 elif df_lineups.nationality[i] == 'Macedonia, Republic of':
                     df_lineups.nationality[i] = 'Macedonia'
+                elif df_lineups.nationality[i] == 'Wales':
+                    df_lineups.nationality[i] = 'United Kingdom'
                     
             
             flag = mpimg.imread(f'pictures/flag/{df_lineups.nationality[d]}.png')
@@ -215,4 +218,4 @@ def getLineup(team,path):
 
 
 
-getLineup(team=1,path='Lineups_JSON/lineups_16157.json')
+getLineup(team=1,path='Lineups_JSON/lineups_16248.json')
