@@ -53,24 +53,28 @@ def getLineup(team,path):
                     'Secondary Striker':            (105,39.5,106,40,109,38,113,38,107,36)}
     
     # Nationality abbreviation
-    nationality = {'Autria':'AT', 'Argentina':'AR',
+    nationality = {'Autria':'AT', 'Argentina':'AR','Algeria':'DZ',
                    'Belgium':'BE', 'Bulgaria':'BG','Brazil':'BR',
-                   'Croatia':'HR','Cyprus':'CY','Czech Republic':'SK','Chile':'CL','Colombia':'COL',
-                   'Danmark':'DK',
+                   'Croatia':'HR','Cyprus':'CY','Czech Republic':'SK','Chile':'CL','Colombia':'COL','Cameroon':'CM','Central African Republic':'CF','Costa Rica':'CR',
+                   'Denmark':'DK',
                    'Estonia':'EE',
                    'France':'FR', 'Finland':'FI',
                    'Greece':'EL','Germany':'DE','Ghana':'GHA',
-                   'Hungary':'HU',
+                   'Hungary':'HU','Honduras':'HND',
                    'Ireland':'IE','Italy':'IT',
+                   'Japan':'JP',
+                   'Korea (South)':'KR',
                    'Latvia':'LV','Luxembourg':'LU', 'Lithuania':'LT',
-                   'Morocco':'MAR', 'Monaco':'MCO',
-                   'Netherlands':'NL',
-                   'Portugal':'PT','Poland':'PL',
-                   'Romania':'RO',
-                   'Spain':'ES','Slovenia':'SI','Sweden':'SE',
-                   'Turkey':'TR','Turkmenistan':'TM',
+                   'Morocco':'MAR', 'Monaco':'MCO','Mexico':'MX','Montenegro':'ME','Macedonia':'MK',
+                   'Netherlands':'NL','Nigeria':'NGA',
+                   'Portugal':'PT','Poland':'PL','Paraguay':'PRY',
+                   'Romania':'RO','Russia':'RUS',
+                   'Spain':'ES','Slovenia':'SI','Sweden':'SE','Slovakia':'SK','Serbia':'RS','Senegal':'SN',
+                   'Turkey':'TR','Turkmenistan':'TM','Togo':'TGO',
                    'Uruguay':'UY','United Kingdom':'UK','Uganda':'UG'
                     }
+    
+    color_team = 'blue' if team == 0 else 'red'
     
     # OPEN THE FILE
     with open(f'{path}') as file:
@@ -167,11 +171,21 @@ def getLineup(team,path):
         RCards = []
         YCards = []
         for d in range(len(df_lineups.index)):
-            plt.scatter(placementOnField[df_lineups.position[d]][0],placementOnField[df_lineups.position[d]][1], c='red')
+            plt.scatter(placementOnField[df_lineups.position[d]][0],placementOnField[df_lineups.position[d]][1], c=color_team, marker='p', s=100)
+            plt.scatter(placementOnField[df_lineups.position[d]][0],placementOnField[df_lineups.position[d]][1]-1, c='black')
             plt.text(placementOnField[df_lineups.position[d]][4],placementOnField[df_lineups.position[d]][5],s=df_lineups['number'][d], fontweight='extra bold', fontsize=15, c='cyan')                #NUMBER   
-            plt.text(placementOnField[df_lineups.position[d]][2],placementOnField[df_lineups.position[d]][3],s=df_lineups['player'][d], fontweight='extra bold')                                       #POSITION
+            plt.text(placementOnField[df_lineups.position[d]][2]+0.3,placementOnField[df_lineups.position[d]][3],s=df_lineups['player'][d], fontweight='extra bold')                                       #POSITION
 
             # Add nationality flag
+            for i in range(len(df_lineups.nationality)):
+                if df_lineups.nationality[i] == 'Guadeloupe':
+                    df_lineups.nationality[i] = 'France'
+                elif df_lineups.nationality[i] == 'Korea (South)':
+                    df_lineups.nationality[i] = 'South Korea'
+                elif df_lineups.nationality[i] == 'Macedonia, Republic of':
+                    df_lineups.nationality[i] = 'Macedonia'
+                    
+            
             flag = mpimg.imread(f'pictures/flag/{df_lineups.nationality[d]}.png')
             imagebox_away = OffsetImage(flag, zoom=0.16)
             aa = AnnotationBbox(imagebox_away, (placementOnField[df_lineups.position[d]][6]+2.5, placementOnField[df_lineups.position[d]][7]-1.2), frameon=False)
@@ -182,8 +196,7 @@ def getLineup(team,path):
 
                 YCards.append(patches.Rectangle((placementOnField[df_lineups.position[d]][8],placementOnField[df_lineups.position[d]][9]),1.5,2))
             elif df_lineups['cards'][d] == 'Red Card':
-                #rect = patches.Rectangle((placementOnField[df_lineups.position[d][8]],placementOnField[df_lineups.position[d][9]]),1.5,2, linewidth=1, edgecolor='k', facecolor='r')
-                RCards.append(patches.Rectangle((placementOnField[df_lineups.position[d]][8],placementOnField[df_lineups.position[d]][9])))
+                RCards.append(patches.Rectangle((placementOnField[df_lineups.position[d]][8],placementOnField[df_lineups.position[d]][9]),1.5,2))
             else:
                 continue
         pcY = PatchCollection(YCards,linewidth=1, edgecolor='k', facecolor='y')
@@ -195,9 +208,11 @@ def getLineup(team,path):
          
         plt.subplots_adjust(right=1, top=1, bottom=0, left=0)
         plt.suptitle(f'{time_laps[h]} to {time_laps[h+1]}', fontweight='extra bold')
-        plt.title(f'{domicil_team} VS {visitor_team}',fontweight='extra bold', c='grey')
+        plt.text(30,-1,f'{domicil_team}', fontweight='bold', color='blue', fontsize=15)
+        plt.text(58,-1, 'VS', fontweight='bold', color='white', fontsize=15)
+        plt.text(75,-1, f'{visitor_team}', fontweight='bold', color='red', fontsize=15)
         plt.show()
 
 
 
-getLineup(team=0,path='Lineups_JSON/lineups_16120.json')
+getLineup(team=1,path='Lineups_JSON/lineups_16157.json')
