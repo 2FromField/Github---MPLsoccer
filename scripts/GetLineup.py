@@ -55,17 +55,17 @@ def getLineup(team,path):
     # Nationality abbreviation
     nationality = {'Austria':'AT', 'Argentina':'AR','Algeria':'DZ',
                    'Belgium':'BE', 'Bulgaria':'BG','Brazil':'BR','Bosnia and Herzegovina':'BA',
-                   'Croatia':'HR','Cyprus':'CY','Czech Republic':'SK','Chile':'CL','Colombia':'COL','Cameroon':'CM','Central African Republic':'CF','Costa Rica':'CR','Cape Verde':'CV','Congo, (Kinshasa)':'CG','China':'CHN',
+                   'Croatia':'HR','Cyprus':'CY','Czech Republic':'SK','Chile':'CL','Colombia':'COL','Cameroon':'CM','Central African Republic':'CF','Costa Rica':'CR','Cape Verde':'CV','Congo, (Kinshasa)':'CG','China':'CHN','Côte d\'Ivoire':'CI','Canada':'CAN',
                    'Denmark':'DK',
                    'Estonia':'EE','Ecuador':'EC',
                    'France':'FR', 'Finland':'FI',
                    'Greece':'EL','Germany':'DE','Ghana':'GHA','Guinea-Bissau':'GW',
                    'Hungary':'HU','Honduras':'HND',
-                   'Ireland':'IE','Italy':'IT',
+                   'Ireland':'IE','Italy':'IT','Iceland':'ISL',
                    'Japan':'JP',
                    'Korea (South)':'KR',
                    'Latvia':'LV','Luxembourg':'LU', 'Lithuania':'LT',
-                   'Morocco':'MAR', 'Monaco':'MCO','Mexico':'MX','Montenegro':'ME','Macedonia, Republic of':'MKD',
+                   'Morocco':'MAR', 'Monaco':'MCO','Mexico':'MX','Montenegro':'ME','Macedonia, Republic of':'MKD','Mali':'MLI',
                    'Netherlands':'NL','Nigeria':'NGA',
                    'Portugal':'PT','Poland':'PL','Paraguay':'PRY','Peru':'PE',
                    'Romania':'RO','Russia':'RUS',
@@ -218,4 +218,4 @@ def getLineup(team,path):
 
 
 
-getLineup(team=1,path='Lineups_JSON/lineups_16248.json')
+getLineup(team=0,path='Lineups_JSON/lineups_69181.json')
